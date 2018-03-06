@@ -1,0 +1,17 @@
+.transition(@what: all, @time: 0.2s, @func: ease) {
+	-webkit-transition: @what @time @func;
+	-o-transition: @what @time @func;
+	transition: @what @time @func;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.clearfix {
+ &:after, &:before {
+     content: "";
+     display: table;
+     clear: both;
+    }
+}
