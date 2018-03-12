@@ -4,6 +4,7 @@ import {
     updateTweetInStoreAction,
     addTweetToStoreAction,
     updateTweetFromServerAction,
+    addCommentToStoreAction,
 } from './../actions/tweetsActions';
 
 function tweetsMiddleware({ dispatch }) {
@@ -15,7 +16,14 @@ function tweetsMiddleware({ dispatch }) {
                     .then((tweets) => {
                         const sortedTweets = tweets.sort((a, b) => (
                             new Date(b.tweetDate) - new Date(a.tweetDate)
-                        ));
+                        )).map((tweet) => {
+                            const sortedComments = tweet.comments.sort((a, b) => (
+                                new Date(a.commentDate) - new Date(b.commentDate)
+                            ));
+                            const mappedTweet = Object.assign({}, tweet, {comments: sortedComments});
+
+                            return mappedTweet;
+                        });
 
                         dispatch(tweetsLoadedAction(sortedTweets));
                     });
@@ -59,6 +67,19 @@ function tweetsMiddleware({ dispatch }) {
                     .then(res => (
                         dispatch(updateTweetFromServerAction(res.tweet))
                     ));
+            }
+            case 'ADD_COMMENT': {
+                const { comment, tweetId } = action.payload;
+                dispatch(addCommentToStoreAction(action.payload));
+
+                return fetch(`http://localhost:4444/tweets/${tweetId}`, {
+                    method: 'post',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(comment),
+                })
             }
 
             default: return next(action);

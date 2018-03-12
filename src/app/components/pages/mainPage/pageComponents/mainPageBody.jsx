@@ -50,7 +50,6 @@ class MainPageBody extends Component {
                     </main>
                 }
             </React.Fragment>
-
         );
     }
 }
@@ -60,7 +59,6 @@ MainPageBody.propTypes = {
     filter: PropTypes.string.isRequired,
     fetchTweets: PropTypes.func.isRequired,
 };
-
 
 function mapStateToProps(state) {
     return {

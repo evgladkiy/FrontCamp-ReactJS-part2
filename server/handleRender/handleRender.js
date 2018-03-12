@@ -54,11 +54,11 @@ function handleRender(req, res) {
                 </Provider>
             );
             const html = ReactDOMServer.renderToString(app);
+            const preloadState = stateToJs(store.getState());
 
             if (context.url) {
                 return res.redirect(context.url);
             }
-            const preloadState = stateToJs(store.getState());
             return res.send(getFullHtml(html, preloadState));
         });
 }

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/user', (req, res) => {
     const user = req.user || {};
+
     res.send(user);
 });
 

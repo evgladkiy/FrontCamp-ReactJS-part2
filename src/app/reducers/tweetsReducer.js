@@ -32,6 +32,19 @@ function tweetsReducer(state = Immutable.List(), action) {
             return state.unshift(Immutable.fromJS(newTweet));
         }
 
+        case 'ADD_COMMENT_TO_STORE': {
+            const { comment, tweetId } = action.payload;
+            const temporaryID = String(lodash.random(0, 10000000));
+            const commentWithId = Object.assign({}, comment, { _id: temporaryID });
+
+            const currentTweetIndex = state.findIndex(tweet => tweet.get('_id') === tweetId);
+            const currentTweet = state.get(currentTweetIndex);
+            const newCommentList = currentTweet.get('comments').push(Immutable.Map(commentWithId));
+            const updatedTweet = currentTweet.set('comments', newCommentList);
+
+            return state.set(currentTweetIndex, updatedTweet);
+        }
+
         default: return state;
     }
 }

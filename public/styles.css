@@ -405,7 +405,7 @@ main {
 .tweet-footer .likes:hover {
   color: crimson;
 }
-.tweet-footer .commnts:hover {
+.tweet-footer .comments:hover {
   color: #228ae6;
 }
 .tweet-footer .retweets.active,
@@ -546,7 +546,7 @@ main > form .btn-container {
   border-color: #b3b3b3;
 }
 .comment_submit {
-  height: 30px;
+  height: 33px;
   align-self: flex-end;
   margin-left: 20px;
 }

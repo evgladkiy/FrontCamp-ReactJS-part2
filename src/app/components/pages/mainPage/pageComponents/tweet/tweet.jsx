@@ -3,10 +3,10 @@ import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Commentlist from './commentList';
+import Comments from './comments';
 import TweetFooter from './tweetFooter';
 import { getTweetDate, getNickName, getTweetText } from './tweetHelpers';
-import { updateTweetAction, deleteTweetAction } from './../../../../../actions/tweetsActions';
+import { updateTweetAction, deleteTweetAction, addCommentAction } from './../../../../../actions/tweetsActions';
 
 class Tweet extends PureComponent {
     render() {
@@ -14,6 +14,7 @@ class Tweet extends PureComponent {
             tweetInfo,
             deleteTweet,
             updateTweet,
+            addComment,
             user,
         } = this.props;
 
@@ -43,9 +44,11 @@ class Tweet extends PureComponent {
                   updateTweet={updateTweet}
                   userInfo={user.get('userInfo')}
                 />
-                <Commentlist
+                <Comments
                   comments={tweetInfo.get('comments')}
                   userInfo={user.get('userInfo')}
+                  addComment={addComment}
+                  tweetId={tweetInfo.get('_id')}
                 />
             </section>
         );
@@ -56,6 +59,7 @@ Tweet.propTypes = {
     tweetInfo: PropTypes.instanceOf(Immutable.Map).isRequired,
     user: PropTypes.instanceOf(Immutable.Map).isRequired,
     deleteTweet: PropTypes.func.isRequired,
+    addComment: PropTypes.func.isRequired,
     updateTweet: PropTypes.func.isRequired,
 };
 
@@ -73,6 +77,10 @@ function mapActionsToProps(dispatch) {
 
         updateTweet(tweetData) {
             dispatch(updateTweetAction(tweetData));
+        },
+
+        addComment(comment) {
+            dispatch(addCommentAction(comment));
         },
     };
 }

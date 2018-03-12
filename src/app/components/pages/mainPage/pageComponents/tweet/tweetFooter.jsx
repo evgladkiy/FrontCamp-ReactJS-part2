@@ -9,6 +9,10 @@ class TweetFooter extends PureComponent {
         this.isButtonPressed = this.isButtonPressed.bind(this);
     }
 
+    setTextareaFocus() {
+        document.getElementById(`commentTextarea-${this.props.id}`).focus();
+    }
+
     isButtonPressed(prop) {
         const { props } = this;
         return props[prop].indexOf(props.userInfo.get('userName')) >= 0;
@@ -29,7 +33,6 @@ class TweetFooter extends PureComponent {
         this.props.updateTweet({ arr, prop, id });
     }
 
-
     render() {
         const { likes, retweets } = this.props;
         const { id, deleteTweet, comments } = this.props;
@@ -44,7 +47,7 @@ class TweetFooter extends PureComponent {
                     <span className="tooltip">Like</span>
                     {likes.size}
                 </button>
-                <button className="commnts">
+                <button className="comments" onClick={() => this.setTextareaFocus()}>
                     <i className="far fa-comment with-tooltip" />
                     <span className="tooltip">Reply</span>
                     {comments.size}
@@ -54,7 +57,7 @@ class TweetFooter extends PureComponent {
                   onClick={() => this.pressButtonHandler('retweets', retweets)}
                 >
                     <i className="fas fa-retweet with-tooltip" />
-                    <span className="tooltip">Retweet</span>
+                    <span className="tooltip">Share</span>
                     {retweets.size}
                 </button>
                 <button className="btn btn_small" onClick={() => deleteTweet(id)}>

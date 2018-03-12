@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 class Header extends PureComponent {
     render() {
         const { isAuthenticated } = this.props;
+
         return (
             <header>
                 <div className="header-container">

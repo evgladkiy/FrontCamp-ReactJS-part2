@@ -41,3 +41,14 @@ export const addTweetToStoreAction = tweet => ({
     type: 'ADD_TWEET_TO_STORE',
     payload: tweet,
 });
+
+export const addCommentAction = comment => ({
+    type: 'ADD_COMMENT',
+    payload: comment,
+});
+
+export const addCommentToStoreAction = comment => ({
+    type: 'ADD_COMMENT_TO_STORE',
+    payload: comment,
+});
+

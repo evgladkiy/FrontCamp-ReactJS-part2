@@ -11,6 +11,12 @@ export const getTweetDate = (tweetDate) => {
         .join(' ');
 };
 
+export const getCurrentDate = () => {
+    const date = new Date();
+
+    return `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`;
+};
+
 export const getNickName = email => `@${email.split('@')[0]}`;
 
 export const getTweetText = tweetText => (

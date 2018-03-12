@@ -5,13 +5,9 @@ import { connect } from 'react-redux';
 
 import { toggleFormAction } from './../../../../actions/tweetsToolboxActions';
 import { addTweetAction } from './../../../../actions/tweetsActions';
+import { getCurrentDate } from './tweet/tweetHelpers';
 
 class NewTweetForm extends PureComponent {
-    static getTweetDate() {
-        const date = new Date();
-        return `${date.getFullYear()} ${date.getMonth()} ${date.getDate()}`;
-    }
-
     constructor() {
         super();
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
@@ -20,6 +16,7 @@ class NewTweetForm extends PureComponent {
     formSubmitHandler(e) {
         const text = this.textarea.value.trim();
         const { userInfo } = this.props;
+
         e.preventDefault();
 
         if (text !== '') {
@@ -30,7 +27,7 @@ class NewTweetForm extends PureComponent {
                 likes: [],
                 retweets: [],
                 comments: [],
-                tweetDate: NewTweetForm.getTweetDate(),
+                tweetDate: getCurrentDate(),
                 avatar: userInfo.get('avatar'),
             };
 
