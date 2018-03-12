@@ -4,7 +4,7 @@ import lodash from 'lodash';
 function tweetsReducer(state = Immutable.List(), action) {
     switch (action.type) {
         case 'TWEETS_LOADED': {
-            return action.payload;
+            return Immutable.fromJS(action.payload);
         }
 
         case 'DELETE_TWEET_FROM_STORE': {
@@ -19,7 +19,7 @@ function tweetsReducer(state = Immutable.List(), action) {
             return state.set(tweetIndex, updatedTweet);
         }
 
-        case 'UPDATE_NEW_TWEET_IN_STORE': {
+        case 'UPDATE_TWEET_FROM_SERVER': {
             state.get(0).set('_id', action.payload);
 
             return state.shift().unshift(Immutable.fromJS(action.payload));
@@ -27,7 +27,7 @@ function tweetsReducer(state = Immutable.List(), action) {
 
         case 'ADD_TWEET_TO_STORE': {
             const temporaryID = String(lodash.random(0, 10000000));
-            const newTweet = Object.assign(action.payload, { _id: temporaryID });
+            const newTweet = Object.assign({}, action.payload, { _id: temporaryID });
 
             return state.unshift(Immutable.fromJS(newTweet));
         }

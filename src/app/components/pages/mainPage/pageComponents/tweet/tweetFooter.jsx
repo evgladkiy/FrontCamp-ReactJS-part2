@@ -11,11 +11,13 @@ class TweetFooter extends PureComponent {
 
     isButtonPressed(prop) {
         const { props } = this;
-        return props[prop].indexOf(props.userName) >= 0;
+        return props[prop].indexOf(props.userInfo.get('userName')) >= 0;
     }
 
     pressButtonHandler(prop, map) {
-        const { userName, id } = this.props;
+        const { userInfo, id } = this.props;
+        const userName = userInfo.get('userName');
+
         let arr = map.toArray();
 
         if (arr.indexOf(userName) >= 0) {
@@ -24,11 +26,7 @@ class TweetFooter extends PureComponent {
             arr.push(userName);
         }
 
-        this.props.updateTweet({
-            arr,
-            prop,
-            id,
-        });
+        this.props.updateTweet({ arr, prop, id });
     }
 
 
@@ -72,7 +70,7 @@ TweetFooter.propTypes = {
     likes: PropTypes.instanceOf(Immutable.List).isRequired,
     retweets: PropTypes.instanceOf(Immutable.List).isRequired,
     comments: PropTypes.instanceOf(Immutable.List).isRequired,
-    userName: PropTypes.string.isRequired,
+    userInfo: PropTypes.instanceOf(Immutable.Map).isRequired,
     id: PropTypes.string.isRequired,
     deleteTweet: PropTypes.func.isRequired,
     updateTweet: PropTypes.func.isRequired,

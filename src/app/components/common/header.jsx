@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 class Header extends PureComponent {
     render() {
-        const { userName, isAuthenticated, logOut } = this.props;
+        const { isAuthenticated } = this.props;
         return (
             <header>
                 <div className="header-container">
@@ -14,10 +14,12 @@ class Header extends PureComponent {
                     </Link>
                     {isAuthenticated ?
                         <div className="user-container">
-                            <p>{userName}</p>
-                            <button className="link" onClick={() => logOut()}>logout</button>
+                            <p>{this.props.userName}</p>
+                            <a className="link" href="/auth/logout">Sign out</a>
                         </div> :
-                        <p className="login-text">Login to see tweets</p>
+                        <Link to="/login" replace className="link">
+                            Sign in
+                        </Link>
                     }
                 </div>
             </header>
@@ -28,7 +30,6 @@ class Header extends PureComponent {
 Header.propTypes = {
     userName: PropTypes.string.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    logOut: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -38,12 +39,4 @@ function mapStateToProps(state) {
     };
 }
 
-function mapActionsToProps(dispatch) {
-    return {
-        logOut() {
-            dispatch({ type: 'USER_LOGOUT' });
-        },
-    };
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(Header);
+export default connect(mapStateToProps)(Header);

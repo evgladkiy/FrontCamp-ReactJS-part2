@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
+import { connect } from 'react-redux';
+
+import { toggleFormAction } from './../../../../actions/tweetsToolboxActions';
+import { addTweetAction } from './../../../../actions/tweetsActions';
 
 class NewTweetForm extends PureComponent {
     static getTweetDate() {
@@ -15,19 +19,19 @@ class NewTweetForm extends PureComponent {
 
     formSubmitHandler(e) {
         const text = this.textarea.value.trim();
-        const { user } = this.props;
+        const { userInfo } = this.props;
         e.preventDefault();
 
         if (text !== '') {
             const newTweet = {
-                tweetAuthor: user.get('userName'),
-                email: user.get('email'),
+                tweetAuthor: userInfo.get('userName'),
+                email: userInfo.get('email'),
                 tweetText: text,
                 likes: [],
                 retweets: [],
                 comments: [],
                 tweetDate: NewTweetForm.getTweetDate(),
-                avatar: user.get('avatar'),
+                avatar: userInfo.get('avatar'),
             };
 
             this.textarea.value = '';
@@ -74,11 +78,29 @@ class NewTweetForm extends PureComponent {
 }
 
 NewTweetForm.propTypes = {
-    user: PropTypes.instanceOf(Immutable.Map).isRequired,
+    userInfo: PropTypes.instanceOf(Immutable.Map).isRequired,
     addTweet: PropTypes.func.isRequired,
     toggleForm: PropTypes.func.isRequired,
     shouldShowForm: PropTypes.bool.isRequired,
 };
 
+function mapStateToProps(state) {
+    return {
+        shouldShowForm: state.toolbox.get('shouldShowForm'),
+        userInfo: state.user.get('userInfo'),
+    };
+}
 
-export default NewTweetForm;
+function mapActionsToProps(dispatch) {
+    return {
+        toggleForm(bool) {
+            dispatch(toggleFormAction(bool));
+        },
+
+        addTweet(tweet) {
+            dispatch(addTweetAction(tweet));
+        },
+    };
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(NewTweetForm);

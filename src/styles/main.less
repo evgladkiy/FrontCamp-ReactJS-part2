@@ -62,8 +62,9 @@ header {
             color: #b3b3b3;
             font-weight: bold;
         }
-        & button {
+        & a {
             padding: 0;
+            font-size: 1.6rem;
         }
     }
     & .login-text {
@@ -72,8 +73,8 @@ header {
 }
 
 .login-page {
-    & button {
-        max-width: 150px;
+    & a {
+        max-width: 180px;
         font-size: 16px;
         font-weight: bold;
         font-style: italic;
@@ -81,10 +82,13 @@ header {
         position: absolute;
         left: 50%;
         top: 50%;
+        text-decoration: none;
         transform: translate(-50%, -200%);
     }
     & i {
         font-weight: normal;
+        padding-left: 5px;
+        padding-right: 0;
     }
 }
 
@@ -172,6 +176,11 @@ main {
 
     & .author-name {
         margin-bottom: 8px;
+        color: #1e7cd0;
+        display: inline-block;
+    }
+    & .author-name:hover {
+        color: #1e7cd0;
     }
 
     & .author-nikName,
@@ -227,6 +236,9 @@ main {
     .clearfix;
     line-height: 33px;
     font-size: 1.4rem;
+    margin: 0 -30px;
+    padding: 0 30px 20px 30px;
+    border-bottom: 1px solid @libht-grey;
 
     & .tweet-date {
         color: @text-light;
@@ -307,7 +319,7 @@ main > div {
     margin: 30px 0;
 }
 
-form {
+main > form {
     margin: 30px 0 50px;
 
     & .btn i {

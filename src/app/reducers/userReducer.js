@@ -9,13 +9,17 @@ const initState = Immutable.fromJS({
 
 function userReducer(state = initState, action) {
     switch (action.type) {
-        case 'USER_LOGGED_IN': {
-            return state.set('isAuthenticated', action.payload);
+        case 'AUTHENTICATE_USER': {
+            if (action.payload && action.payload._id) {
+                return Immutable.fromJS({
+                    userInfo: action.payload,
+                    isAuthenticated: true,
+                });
+            }
+
+            return state;
         }
 
-        case 'USER_LOGGED_OUT': {
-            return state.set('isAuthenticated', action.payload);
-        }
 
         default: return state;
     }

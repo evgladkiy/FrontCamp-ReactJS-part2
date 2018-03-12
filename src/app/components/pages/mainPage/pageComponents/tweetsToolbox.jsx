@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { toggleFormAction, updateFilterAction } from './../../../../actions/tweetsToolboxActions';
 
 class TweetsToolbox extends PureComponent {
     constructor() {
@@ -41,4 +43,22 @@ TweetsToolbox.propTypes = {
     updateFilter: PropTypes.func.isRequired,
 };
 
-export default TweetsToolbox;
+function mapStateToProps(state) {
+    return {
+        shouldShowForm: state.toolbox.get('shouldShowForm'),
+    };
+}
+
+function mapActionsToProps(dispatch) {
+    return {
+        toggleForm(bool) {
+            dispatch(toggleFormAction(bool));
+        },
+
+        updateFilter(filter) {
+            dispatch(updateFilterAction(filter));
+        },
+    };
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(TweetsToolbox);

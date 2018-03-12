@@ -1,4 +1,10 @@
-import Immutable from 'immutable';
+import {
+    tweetsLoadedAction,
+    deleteTweetFromStoreAction,
+    updateTweetInStoreAction,
+    addTweetToStoreAction,
+    updateTweetFromServerAction,
+} from './../actions/tweetsActions';
 
 function tweetsMiddleware({ dispatch }) {
     return (next => (action) => {
@@ -11,18 +17,12 @@ function tweetsMiddleware({ dispatch }) {
                             new Date(b.tweetDate) - new Date(a.tweetDate)
                         ));
 
-                        dispatch({
-                            type: 'TWEETS_LOADED',
-                            payload: Immutable.fromJS(sortedTweets),
-                        });
+                        dispatch(tweetsLoadedAction(sortedTweets));
                     });
             }
 
             case 'DELETE_TWEET': {
-                dispatch({
-                    type: 'DELETE_TWEET_FROM_STORE',
-                    payload: action.payload,
-                });
+                dispatch(deleteTweetFromStoreAction(action.payload));
 
                 return fetch(`http://localhost:4444/tweets/${action.payload}`, {
                     method: 'delete',
@@ -30,10 +30,7 @@ function tweetsMiddleware({ dispatch }) {
             }
 
             case 'UPDATE_TWEET': {
-                dispatch({
-                    type: 'UPDATE_TWEET_IN_STORE',
-                    payload: action.payload,
-                });
+                dispatch(updateTweetInStoreAction(action.payload));
 
                 return fetch(`http://localhost:4444/tweets/${action.payload.id}`, {
                     method: 'put',
@@ -48,12 +45,9 @@ function tweetsMiddleware({ dispatch }) {
             }
 
             case 'ADD_TWEET': {
-                dispatch({
-                    type: 'ADD_TWEET_TO_STORE',
-                    payload: action.payload,
-                });
+                dispatch(addTweetToStoreAction(action.payload));
 
-                return fetch('http://localhost:4444/tweets/', {
+                return fetch('http://localhost:4444/tweets', {
                     method: 'post',
                     headers: {
                         Accept: 'application/json',
@@ -63,10 +57,7 @@ function tweetsMiddleware({ dispatch }) {
                 })
                     .then(response => response.json())
                     .then(res => (
-                        dispatch({
-                            type: 'UPDATE_NEW_TWEET_IN_STORE',
-                            payload: res.tweet,
-                        })
+                        dispatch(updateTweetFromServerAction(res.tweet))
                     ));
             }
 

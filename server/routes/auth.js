@@ -4,7 +4,8 @@ import passport from 'passport';
 const router = express.Router();
 
 router.get('/user', (req, res) => {
-    res.send(req.user);
+    const user = req.user || {};
+    res.send(user);
 });
 
 router.get('/logout', (req, res) => {

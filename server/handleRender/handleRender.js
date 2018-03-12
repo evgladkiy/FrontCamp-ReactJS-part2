@@ -32,15 +32,15 @@ function getFullHtml(html, preloadedState) {
 
 function handleRender(req, res) {
     const store = configureStore({});
-
     const currentBranch = matchRoutes(routes, req.url);
     const promises = currentBranch.map(({ route, match }) => {
         const { fetchData } = route.component;
+
         if (!(fetchData instanceof Function)) {
             return Promise.resolve(null);
         }
 
-        return fetchData(store.dispatch, match);
+        return fetchData(store.dispatch, req.user, match);
     });
 
     return Promise.all(promises)

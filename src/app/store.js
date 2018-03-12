@@ -5,12 +5,13 @@ import installDevTools from 'immutable-devtools';
 
 import tweetsReducer from './reducers/tweetsReducer';
 import userReducer from './reducers/userReducer';
-import toolboxReducer from './reducers/toolBoxReducer';
+import toolboxReducer from './reducers/toolboxReducer';
 
 import tweetsMiddleware from './middleware/tweetsMiddleware';
 import userMiddleware from './middleware/userMiddleware';
 
 installDevTools(Immutable);
+
 
 export const stateToJs = state => (
     Object.keys(state)

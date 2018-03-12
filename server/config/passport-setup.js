@@ -14,25 +14,23 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-passport.use(
-    new GoogleStrategy({
-        callbackURL: '/auth/google/redirect',
-        clientID: keys.google.clientID,
-        clientSecret: keys.google.clientSecret,
-    }, (accessToken, refreshToken, profile, done) => {
-        console.log(profile)
-        User.findOne({ authId: profile.id }).then((currentUser) => {
-            if (currentUser) {
-                done(null, currentUser);
-            } else {
-                new User({
-                    userName: profile.displayName,
-                    authId: profile.id,
-                    email: profile.emails[0].value,
-                    avatar: profile._json.image.url,
-                }).save().then((newUser) => {
-                    done(null, newUser);
-                });
-            }
-        });
-    }));
+passport.use(new GoogleStrategy({
+    callbackURL: '/auth/google/redirect',
+    clientID: keys.google.clientID,
+    clientSecret: keys.google.clientSecret,
+}, (accessToken, refreshToken, profile, done) => {
+    User.findOne({ authId: profile.id }).then((currentUser) => {
+        if (currentUser) {
+            done(null, currentUser);
+        } else {
+            new User({
+                userName: profile.displayName,
+                authId: profile.id,
+                email: profile.emails[0].value,
+                avatar: profile._json.image.url,
+            }).save().then((newUser) => {
+                done(null, newUser);
+            });
+        }
+    });
+}));
