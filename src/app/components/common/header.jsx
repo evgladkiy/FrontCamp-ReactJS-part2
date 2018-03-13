@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class Header extends PureComponent {
+export class Header extends PureComponent {
     render() {
         const { isAuthenticated } = this.props;
 

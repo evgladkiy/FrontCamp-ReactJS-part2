@@ -377,12 +377,10 @@ module.exports = warning;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
+ * Copyright (c) 2013-present, Facebook, Inc.
  *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 
@@ -6930,6 +6928,7 @@ exports.default = Footer;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Header = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6953,7 +6952,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Header = function (_PureComponent) {
+var Header = exports.Header = function (_PureComponent) {
     _inherits(Header, _PureComponent);
 
     function Header() {
@@ -6966,6 +6965,7 @@ var Header = function (_PureComponent) {
         key: 'render',
         value: function render() {
             var isAuthenticated = this.props.isAuthenticated;
+
 
             return _react2.default.createElement(
                 'header',
@@ -32424,9 +32424,14 @@ var Comments = function (_PureComponent) {
                 'div',
                 { className: 'comments-container' },
                 _react2.default.createElement(
-                    'button',
-                    { type: 'submit', className: 'btn', onClick: this.toggleAllComments },
-                    'show all'
+                    'div',
+                    { className: 'btn-container' },
+                    comments.size > 3 ? _react2.default.createElement(
+                        'button',
+                        { type: 'button', className: 'btn comments-btn', onClick: this.toggleAllComments },
+                        this.state.shouldAllComments ? 'Hide' : 'Show',
+                        ' all comments'
+                    ) : ''
                 ),
                 _react2.default.createElement(_commentList2.default, { comments: this.commentFilter(comments) }),
                 _react2.default.createElement(
@@ -32605,6 +32610,11 @@ var TweetFooter = function (_PureComponent) {
     }
 
     _createClass(TweetFooter, [{
+        key: 'setTextareaFocus',
+        value: function setTextareaFocus() {
+            document.getElementById('commentTextarea-' + this.props.id).focus();
+        }
+    }, {
         key: 'isButtonPressed',
         value: function isButtonPressed(prop) {
             var props = this.props;
@@ -32633,11 +32643,6 @@ var TweetFooter = function (_PureComponent) {
             this.props.updateTweet({ arr: arr, prop: prop, id: id });
         }
     }, {
-        key: 'setTextareaFocus',
-        value: function setTextareaFocus() {
-            document.getElementById('commentTextarea-' + this.props.id).focus();
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -32662,7 +32667,7 @@ var TweetFooter = function (_PureComponent) {
                             return _this2.pressButtonHandler('likes', likes);
                         }
                     },
-                    _react2.default.createElement('i', { className: 'far fa-heart with-tooltip' }),
+                    _react2.default.createElement('i', { className: 'fa' + (this.isButtonPressed('likes') ? 's' : 'r') + ' fa-heart with-tooltip' }),
                     _react2.default.createElement(
                         'span',
                         { className: 'tooltip' },
@@ -32695,7 +32700,7 @@ var TweetFooter = function (_PureComponent) {
                     _react2.default.createElement(
                         'span',
                         { className: 'tooltip' },
-                        'Retweet'
+                        'Share'
                     ),
                     retweets.size
                 ),
@@ -32850,6 +32855,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapActionsToProps)(T
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.NewTweetForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -32881,7 +32887,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NewTweetForm = function (_PureComponent) {
+var NewTweetForm = exports.NewTweetForm = function (_PureComponent) {
     _inherits(NewTweetForm, _PureComponent);
 
     function NewTweetForm() {
@@ -32898,6 +32904,7 @@ var NewTweetForm = function (_PureComponent) {
         value: function formSubmitHandler(e) {
             var text = this.textarea.value.trim();
             var userInfo = this.props.userInfo;
+
 
             e.preventDefault();
 

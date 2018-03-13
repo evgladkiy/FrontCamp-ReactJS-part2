@@ -43,7 +43,7 @@ class TweetFooter extends PureComponent {
                   className={`likes ${this.isButtonPressed('likes') ? 'active' : ''}`}
                   onClick={() => this.pressButtonHandler('likes', likes)}
                 >
-                    <i className="far fa-heart with-tooltip" />
+                    <i className={`fa${this.isButtonPressed('likes') ? 's' : 'r'} fa-heart with-tooltip`} />
                     <span className="tooltip">Like</span>
                     {likes.size}
                 </button>

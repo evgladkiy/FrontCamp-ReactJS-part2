@@ -60,9 +60,14 @@ class Comments extends PureComponent {
 
         return (
             <div className="comments-container">
-                <button type="submit" className="btn" onClick={this.toggleAllComments}>
-                    show all
-                </button>
+                <div className="btn-container">
+                    { comments.size > 3 ?
+                        <button type="button" className="btn comments-btn" onClick={this.toggleAllComments}>
+                            {this.state.shouldAllComments ? 'Hide' : 'Show'} all comments
+                        </button> :
+                        ''
+                    }
+                </div>
                 <CommentList comments={this.commentFilter(comments)} />
                 <form className="comment-form" onSubmit={this.formSubmitHandler}>
                     <img

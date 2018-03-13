@@ -522,6 +522,20 @@ main > form .btn-container {
   color: #657786;
   font-size: 1.3rem;
 }
+.btn-container {
+  margin: 20px 15px 5px 15px;
+}
+.btn.comments-btn {
+  width: 100%;
+  padding: 12px 0;
+  background: #f4f4f4;
+  border: none;
+  color: #333333;
+}
+.btn.comments-btn:hover {
+  color: #333333;
+  background: #eeeeee;
+}
 .comment-author__img {
   border-radius: 50%;
   width: 60px;

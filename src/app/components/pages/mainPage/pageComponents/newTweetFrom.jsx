@@ -7,7 +7,7 @@ import { toggleFormAction } from './../../../../actions/tweetsToolboxActions';
 import { addTweetAction } from './../../../../actions/tweetsActions';
 import { getCurrentDate } from './tweet/tweetHelpers';
 
-class NewTweetForm extends PureComponent {
+export class NewTweetForm extends PureComponent {
     constructor() {
         super();
         this.formSubmitHandler = this.formSubmitHandler.bind(this);
