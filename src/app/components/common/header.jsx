@@ -18,9 +18,7 @@ export class Header extends PureComponent {
                             <p>{this.props.userName}</p>
                             <a className="link" href="/auth/logout">Sign out</a>
                         </div> :
-                        <Link to="/login" replace className="link">
-                            Sign in
-                        </Link>
+                        <Link to="/login" replace className="link">Sign in</Link>
                     }
                 </div>
             </header>

@@ -20,7 +20,9 @@ function tweetsMiddleware({ dispatch }) {
                             const sortedComments = tweet.comments.sort((a, b) => (
                                 new Date(a.commentDate) - new Date(b.commentDate)
                             ));
-                            const mappedTweet = Object.assign({}, tweet, {comments: sortedComments});
+                            const mappedTweet = Object.assign({}, tweets, {
+                                comments: sortedComments,
+                            });
 
                             return mappedTweet;
                         });
@@ -79,7 +81,7 @@ function tweetsMiddleware({ dispatch }) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(comment),
-                })
+                });
             }
 
             default: return next(action);

@@ -51,4 +51,3 @@ export const addCommentToStoreAction = comment => ({
     type: 'ADD_COMMENT_TO_STORE',
     payload: comment,
 });
-

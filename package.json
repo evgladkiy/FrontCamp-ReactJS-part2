@@ -7,7 +7,11 @@
     "server": "nodemon server/server.js --exec babel-node --presets env,react",
     "dev": "webpack-dev-server --open --hot",
     "build": "webpack",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./jestConfig"
   },
   "author": "Yauheni Hladki",
   "license": "ISC",
@@ -23,6 +27,7 @@
     "eslint": "^4.18.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jest": "^21.15.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^3.0.2",
@@ -37,6 +42,8 @@
   },
   "dependencies": {
     "cookie-session": "^2.0.0-beta.3",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.2",
     "immutable": "^3.8.2",
     "immutable-devtools": "^0.1.3",
@@ -48,8 +55,8 @@
     "passport-google-oauth20": "^1.0.0",
     "prop-types": "^15.6.1",
     "pug": "^2.0.0-rc.4",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-config": "^1.0.0-beta.4",

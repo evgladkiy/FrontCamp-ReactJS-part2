@@ -1,6 +1,8 @@
 module.exports = {
     "extends": "airbnb",
+    "plugins": ["jest"],
     "rules": {
+        "linebreak-style": 0,
         "no-underscore-dangle": ["error", { "allow": ["_id", "_json"] }],
         "indent": ["error", 4, {
              "SwitchCase": 1,
@@ -13,7 +15,12 @@ module.exports = {
             "components": [ "Link" ],
             "specialLink": [ "hrefLeft", "hrefRight" ],
             "aspects": [ "invalidHref" ]
-        }]
+        }],
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
     },
     "env": {
         "browser": true,

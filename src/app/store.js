@@ -12,7 +12,6 @@ import userMiddleware from './middleware/userMiddleware';
 
 installDevTools(Immutable);
 
-
 export const stateToJs = state => (
     Object.keys(state)
         .reduce((acc, item) => {

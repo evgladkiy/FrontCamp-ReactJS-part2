@@ -1,4 +1,4 @@
-import { toggleFormAction, updateFilterAction } from './../actions/tweetsToolboxActions';
+import { toggleFormAction, updateFilterAction } from './tweetsToolboxActions';
 
 describe('toggle form action', () => {
     it('should create an TOGGLE_FORM action 1', () => {
@@ -14,7 +14,7 @@ describe('toggle form action', () => {
             payload: false,
         });
     });
-})
+});
 
 describe('update filter action', () => {
     it('should create an TOGGLE_FORM action 1', () => {
@@ -30,4 +30,4 @@ describe('update filter action', () => {
             payload: '',
         });
     });
-})
+});
